@@ -1,10 +1,13 @@
-package com.kburakengin;
+package com.kburakengin.config;
 
+import com.kburakengin.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
+@Import(GameConfig.class)
 @ComponentScan(basePackages = "com.kburakengin")
 public class AppConfig {
 

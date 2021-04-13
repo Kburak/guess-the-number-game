@@ -1,7 +1,7 @@
 package com.kburakengin.console;
 
 
-import com.kburakengin.AppConfig;
+import com.kburakengin.config.AppConfig;
 import com.kburakengin.Game;
 import com.kburakengin.MessageGenerator;
 import com.kburakengin.NumberGenerator;
