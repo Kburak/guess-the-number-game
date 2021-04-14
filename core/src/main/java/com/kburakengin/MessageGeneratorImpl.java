@@ -1,16 +1,14 @@
 package com.kburakengin;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+@Slf4j
 @Component
 public class MessageGeneratorImpl implements MessageGenerator {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MessageGeneratorImpl.class);
 
     private final Game game;
 
@@ -20,7 +18,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
 
     @PostConstruct
     public void init() {
-        LOG.info("game = {}", game);
+        log.info("game = {}", game);
     }
 
     @Override
@@ -36,14 +34,14 @@ public class MessageGeneratorImpl implements MessageGenerator {
             return "You lost. The number was " + game.getNumber();
         } else if (!game.isValidNumberRange()) {
             return "Invalid number range";
-        } else if (game.getRemaining() == game.getGuessCount()) {
+        } else if (game.getRemainingGuesses() == game.getGuessCount()) {
             return "What is your first guess?";
         } else {
             String direction = "Lower";
             if (game.getGuess() < game.getNumber()) {
                 direction = "Higher";
             }
-            return direction + "! You have " + game.getRemaining() + " guesses left.";
+            return direction + "! You have " + game.getRemainingGuesses() + " guesses left.";
         }
     }
 }
