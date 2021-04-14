@@ -3,22 +3,20 @@ package com.kburakengin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+@Component
 public class GameImpl implements Game{
 
     // Logger
     private static final Logger LOG = LoggerFactory.getLogger(GameImpl.class);
 
     //fields
-    @Autowired
-    private NumberGenerator numberGenerator;
-
-    @Autowired
-    @GuessCount
-    private int guessCount;
+    private final NumberGenerator numberGenerator;
+    private final int guessCount;
 
     private int number;
     private int guess;
@@ -26,6 +24,13 @@ public class GameImpl implements Game{
     private int biggest;
     private int remainingGuesses;
     private boolean validNumberRange = true;
+
+    @Autowired
+    public GameImpl(NumberGenerator numberGenerator, @GuessCount int guessCount) {
+        this.numberGenerator = numberGenerator;
+        this.guessCount = guessCount;
+    }
+
 
     // init
     @PostConstruct
@@ -36,8 +41,6 @@ public class GameImpl implements Game{
         remainingGuesses = guessCount;
         biggest = numberGenerator.getMaxNumber();
         number = numberGenerator.next();
-        LOG.debug("the number is {}", number);
-
     }
     @PreDestroy
     public void preDestroy() {

@@ -1,10 +1,7 @@
 package com.kburakengin.console;
 
 
-import com.kburakengin.config.AppConfig;
-import com.kburakengin.Game;
-import com.kburakengin.MessageGenerator;
-import com.kburakengin.NumberGenerator;
+import com.kburakengin.config.GameConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,25 +16,7 @@ public class Main {
         LOG.info("Guess the number game");
 
         // create context(container)
-        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-
-        // get the numberGenerator bean
-        NumberGenerator numberGenerator = context.getBean(NumberGenerator.class);
-
-        // call method
-        int number = numberGenerator.next();
-
-        //log generated number
-        LOG.info("number = {}", number);
-
-        // get the game bean from context(container)
-        Game game = context.getBean(Game.class);
-
-        // get the message bean from context
-        MessageGenerator messageGenerator = context.getBean(MessageGenerator.class);
-
-        LOG.info("Main Message is {}:", messageGenerator.getMainMessage());
-        LOG.info("Result Message is {}", messageGenerator.getResultMessage());;
+        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(GameConfig.class);
 
         //close context
         context.close();
